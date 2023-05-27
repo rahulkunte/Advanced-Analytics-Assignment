@@ -1,0 +1,37 @@
+{
+  "name": "Assignment",
+  "queries": [
+    {
+      "query": "match (s1:streamer)-[e:member]-(sq:squad)\r\nwith sq, count(s1) as memcount\r\nreturn sq.name, memcount\r\norder by memcount desc\r\nlimit 10",
+      "name": "top 5 squads with most members",
+      "style": {
+        "code": "\n@NodeStyle {\n  size: 6\n  color: #DD2222\n  color-hover: Lighter(#DD2222)\n  color-selected: Lighter(#DD2222)\n  border-width: 0.6\n  border-color: #1d1d1d\n  font-size: 3\n}\n\n@NodeStyle HasLabel(node, \"squad\") {\n  color: #DD2222\n  color-hover: Lighter(#DD2222)\n  color-selected: Lighter(#DD2222)\n}\n\n@NodeStyle HasLabel(node, \"streamer\") {\n  color: #FB6E00\n  color-hover: Lighter(#FB6E00)\n  color-selected: Lighter(#FB6E00)\n}\n\n@NodeStyle Greater(Size(Labels(node)), 0) {\n  label: Format(\":{}\", Join(Labels(node), \" :\"))\n}\n\n@NodeStyle HasProperty(node, \"name\") {\n  label: AsText(Property(node, \"name\"))\n}\n\nDefine(LATITUDE_FIELD, \"lat\")\nDefine(LONGITUDE_FIELD, \"lng\")\n\n@NodeStyle And(IsNumber(Property(node, LATITUDE_FIELD)), IsNumber(Property(node, LONGITUDE_FIELD))) {\n  latitude: Property(node, LATITUDE_FIELD)\n  longitude: Property(node, LONGITUDE_FIELD)\n}\n\n\n@EdgeStyle {\n  color: #999999\n  color-hover: #1d1d1d\n  color-selected: #1d1d1d\n  width: 0.3\n  width-hover: 0.9\n  width-selected: 0.9\n  font-size: 3\n}\n\n@EdgeStyle Less(EdgeCount(graph), 30) {\n  label: Type(edge)\n}\n\n@ViewStyle.Map {\n  tile-layer: \"light\"\n}\n",
+        "isDirty": false
+      },
+      "id": "479c898a-1e4f-43be-a213-7c4b3c224725",
+      "order": 0
+    },
+    {
+      "query": "match (s1:streamer)\r\nwhere s1.views_avg > 10\r\nreturn s1.name, s1.views_avg \r\norder by s1.views_avg desc\r\nlimit 10",
+      "name": "top 10 streamers with max avg views",
+      "style": {
+        "code": "\n@NodeStyle {\n  size: 6\n  color: #DD2222\n  color-hover: Lighter(#DD2222)\n  color-selected: Lighter(#DD2222)\n  border-width: 0.6\n  border-color: #1d1d1d\n  font-size: 3\n}\n\n@NodeStyle Greater(Size(Labels(node)), 0) {\n  label: Format(\":{}\", Join(Labels(node), \" :\"))\n}\n\n@NodeStyle HasProperty(node, \"name\") {\n  label: AsText(Property(node, \"name\"))\n}\n\nDefine(LATITUDE_FIELD, \"lat\")\nDefine(LONGITUDE_FIELD, \"lng\")\n\n@NodeStyle And(IsNumber(Property(node, LATITUDE_FIELD)), IsNumber(Property(node, LONGITUDE_FIELD))) {\n  latitude: Property(node, LATITUDE_FIELD)\n  longitude: Property(node, LONGITUDE_FIELD)\n}\n\n\n@EdgeStyle {\n  color: #999999\n  color-hover: #1d1d1d\n  color-selected: #1d1d1d\n  width: 0.3\n  width-hover: 0.9\n  width-selected: 0.9\n  font-size: 3\n}\n\n@EdgeStyle Less(EdgeCount(graph), 30) {\n  label: Type(edge)\n}\n\n@ViewStyle.Map {\n  tile-layer: \"light\"\n}\n",
+        "isDirty": false
+      },
+      "id": "91833dfe-198c-46a8-84a3-b726b4f7e84a",
+      "order": 1
+    },
+    {
+      "query": "match (s1:streamer)-[e:plays]-(g:game)\r\nwhere s1.name in ['kingsleague','evelone192','thegrefg','austinshow','auronplay','ibai','paulinholokobr','elspreen','adinross','asmongold']\r\nreturn * ",
+      "id": "e834f2e8-9886-4ab5-aba8-83ecb6087137",
+      "name": "top 10 streamers and games they play",
+      "description": "",
+      "order": 2,
+      "style": {
+        "code": "\n@NodeStyle {\n  size: 6\n  color: #DD2222\n  color-hover: Lighter(#DD2222)\n  color-selected: Lighter(#DD2222)\n  border-width: 0.6\n  border-color: #1d1d1d\n  font-size: 3\n}\n\n@NodeStyle HasLabel(node, \"game\") {\n  color: #DD2222\n  color-hover: Lighter(#DD2222)\n  color-selected: Lighter(#DD2222)\n}\n\n@NodeStyle HasLabel(node, \"streamer\") {\n  color: #FB6E00\n  color-hover: Lighter(#FB6E00)\n  color-selected: Lighter(#FB6E00)\n}\n\n@NodeStyle Greater(Size(Labels(node)), 0) {\n  label: Format(\":{}\", Join(Labels(node), \" :\"))\n}\n\n@NodeStyle HasProperty(node, \"name\") {\n  label: AsText(Property(node, \"name\"))\n}\n\nDefine(LATITUDE_FIELD, \"lat\")\nDefine(LONGITUDE_FIELD, \"lng\")\n\n@NodeStyle And(IsNumber(Property(node, LATITUDE_FIELD)), IsNumber(Property(node, LONGITUDE_FIELD))) {\n  latitude: Property(node, LATITUDE_FIELD)\n  longitude: Property(node, LONGITUDE_FIELD)\n}\n\n\n@EdgeStyle {\n  color: #999999\n  color-hover: #1d1d1d\n  color-selected: #1d1d1d\n  width: 0.3\n  width-hover: 0.9\n  width-selected: 0.9\n  font-size: 3\n}\n\n@EdgeStyle Less(EdgeCount(graph), 30) {\n  label: Type(edge)\n}\n\n@ViewStyle.Map {\n  tile-layer: \"light\"\n}\n"
+      }
+    }
+  ],
+  "id": 0,
+  "order": 0
+}
